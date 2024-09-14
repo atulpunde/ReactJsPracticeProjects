@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const NumberSelector = () => {
+const NumberSelector = ({
+  selectedNumber,
+  setSelectedNumber,
+  error,
+  setError,
+}) => {
   const diceNumbers = [1, 2, 3, 4, 5, 6];
-  const [selectedNumber, setSelectedNumber] = useState();
 
-  console.log(selectedNumber);
+  const numberSelectorHandle = (value) => {
+    setSelectedNumber(value);
+    setError("");
+  };
 
   return (
     <NumberSelectorContainer>
+      <p className="error">{error}</p>
       <div className="flex">
         {diceNumbers.map((value, index) => {
           return (
             <Box
               key={index}
               isSelected={value === selectedNumber}
-              onClick={() => setSelectedNumber(value)}
+              onClick={() => numberSelectorHandle(value)}
             >
               {value}
             </Box>
@@ -38,9 +46,14 @@ const NumberSelectorContainer = styled.div`
     display: flex;
     gap: 24px;
   }
+
   p {
     font-size: 24px;
     font-weight: 700px;
+  }
+
+  .error {
+    color: red;
   }
 `;
 
