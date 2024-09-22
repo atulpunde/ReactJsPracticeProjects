@@ -4,6 +4,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config/firebase";
+import ContactCard from "./components/ContactCard";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -19,8 +20,7 @@ const App = () => {
             ...doc.data(),
           };
         });
-        setContacts;
-        contactsList;
+        setContacts(contactsList);
       } catch (error) {
         console.log(error);
       }
@@ -41,6 +41,11 @@ const App = () => {
           />
         </div>
         <AiFillPlusCircle className="cursor-pointer text-5xl text-white" />
+      </div>
+      <div className="mt-4 flex flex-col gap-3">
+        {contacts.map((contact) => (
+          <ContactCard contact={contact} />
+        ))}
       </div>
     </div>
   );
