@@ -17,5 +17,6 @@
 ## Ipad view
 ![image](https://github.com/user-attachments/assets/e66dd805-77a7-4235-bfd7-f2958fbe6d50)
 
-
+## Screen recording
+https://github.com/user-attachments/assets/80cbec21-9302-4b91-ab94-ba0c001395c5
 
