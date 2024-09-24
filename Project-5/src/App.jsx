@@ -5,9 +5,20 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config/firebase";
 import ContactCard from "./components/ContactCard";
+import Modal from "./components/Modal";
+import AddAndUpdateContact from "./components/AddAndUpdateContact";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const getContacts = async () => {
@@ -40,13 +51,18 @@ const App = () => {
             className="h-10 flex-grow rounded-md border border-white bg-transparent pl-10 text-white"
           />
         </div>
-        <AiFillPlusCircle className="cursor-pointer text-5xl text-white" />
+        <AiFillPlusCircle
+          onClick={onOpen}
+          className="cursor-pointer text-5xl text-white"
+        />
       </div>
       <div className="mt-4 flex flex-col gap-3">
         {contacts.map((contact) => (
-          <ContactCard contact={contact} />
+          <ContactCard key={contact.id} contact={contact} />
         ))}
       </div>
+
+      <AddAndUpdateContact isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };
