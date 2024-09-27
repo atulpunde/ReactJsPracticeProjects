@@ -5,20 +5,12 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config/firebase";
 import ContactCard from "./components/ContactCard";
-import Modal from "./components/Modal";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
+import useModalState from "./components/hooks/useModalState";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onOpen = () => {
-    setIsOpen(true);
-  };
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  const { isOpen, onOpen, onClose } = useModalState();
 
   useEffect(() => {
     const getContacts = async () => {
