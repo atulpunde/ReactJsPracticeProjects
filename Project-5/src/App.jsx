@@ -7,6 +7,7 @@ import { db } from "./config/firebase";
 import ContactCard from "./components/ContactCard";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
 import useModalState from "./components/hooks/useModalState";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
