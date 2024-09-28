@@ -35,6 +35,30 @@ const App = () => {
     getContacts();
   }, []);
 
+  const searchContact = (e) => {
+    const search = e.target.value;
+
+    try {
+      const contactsRef = collection(db, "contacts");
+      onSnapshot(contactsRef, (snapshot) => {
+        const contactsList = snapshot.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        });
+
+        const searchedList = contactsList.filter((contact) =>
+          contact.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setContacts(searchedList);
+        return searchedList;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-[370px] px-4">
       <NavBar />
@@ -44,6 +68,7 @@ const App = () => {
           <input
             type="text"
             className="h-10 flex-grow rounded-md border border-white bg-transparent pl-10 text-white"
+            onChange={searchContact}
           />
         </div>
         <AiFillPlusCircle
