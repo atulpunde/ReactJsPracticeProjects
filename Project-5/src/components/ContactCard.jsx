@@ -5,8 +5,11 @@ import { IoMdTrash } from "react-icons/io";
 import { RiEditCircleLine } from "react-icons/ri";
 import { db } from "../config/firebase";
 import AddAndUpdateContact from "./AddAndUpdateContact";
+import useModalState from "./hooks/useModalState";
 
 const ContactCard = ({ contact }) => {
+  const { isOpen, onClose, onOpen } = useModalState();
+
   const deleteContact = async (id) => {
     try {
       await deleteDoc(doc(db, "contacts", id));
@@ -27,13 +30,19 @@ const ContactCard = ({ contact }) => {
           <p className="text-sm">{contact.email}</p>
         </div>
       </div>
-      <div className="flex text-3xl">
-        <RiEditCircleLine />
+      <div className="flex text-3xl gap-4">
+        <RiEditCircleLine onClick={onOpen} className="cursor-pointer" />
         <IoMdTrash
-          className="text-orange"
+          className="text-orange cursor-pointer"
           onClick={() => deleteContact(contact.id)}
         />
       </div>
+      <AddAndUpdateContact
+        isUpdate
+        contact={contact}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </div>
   );
 };
