@@ -45,6 +45,7 @@ const AddAndUpdateContact = ({ isOpen, onClose, isUpdate, contact }) => {
               : { name: "", email: "" }
           }
           onSubmit={(values) => {
+            values = { ...values, email: values.email.toLowerCase() };
             isUpdate ? updateContact(values, contact.id) : addContact(values);
           }}
         >
