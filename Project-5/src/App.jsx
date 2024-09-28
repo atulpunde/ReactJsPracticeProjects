@@ -8,6 +8,7 @@ import ContactCard from "./components/ContactCard";
 import AddAndUpdateContact from "./components/AddAndUpdateContact";
 import useModalState from "./components/hooks/useModalState";
 import "react-toastify/dist/ReactToastify.css";
+import NotFoundContacts from "./components/NotFoundContacts";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -77,9 +78,13 @@ const App = () => {
         />
       </div>
       <div className="mt-4 flex flex-col gap-3">
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} contact={contact} />
-        ))}
+        {contacts.length == 0 ? (
+          <NotFoundContacts />
+        ) : (
+          contacts.map((contact) => (
+            <ContactCard key={contact.id} contact={contact} />
+          ))
+        )}
       </div>
 
       <AddAndUpdateContact isOpen={isOpen} onClose={onClose} />
