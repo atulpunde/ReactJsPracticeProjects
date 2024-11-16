@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  background-color: cyan;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.wrapper button {
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+}
+.accordian {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  background-color: blue;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.answer {
+  margin-top: 10px;
+}
